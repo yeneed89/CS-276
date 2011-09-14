@@ -1,7 +1,10 @@
 package hello.sdeeney.com;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class HelloAndroidActivity extends Activity {
-	public CharSequence text;
+	private SharedPreferences myPrefs; 
+	private CharSequence text;
 	private TextView tv;
 	
     /** Called when the activity is first created. */
@@ -21,9 +25,13 @@ public class HelloAndroidActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT).show();
+        
         Button button = (Button) findViewById(R.id.button);
         tv = (TextView) findViewById(R.id.tv);
         final EditText textBox = (EditText) findViewById(R.id.editText);
+        myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        text = myPrefs.getString("text", null);
+        ChangeText();
         
         textBox.setOnKeyListener(new OnKeyListener(){
         	
@@ -46,6 +54,7 @@ public class HelloAndroidActivity extends Activity {
         	}
         });
     }
+    
     @Override
     public void onStart()
     {
@@ -67,7 +76,11 @@ public class HelloAndroidActivity extends Activity {
     @Override
     public void onPause()
     {
+    	Editor editor= myPrefs.edit();
+    	editor.putString("text", text.toString());
+    	editor.commit();
     	Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
+    	
     	super.onPause();
     }
     @Override
@@ -88,11 +101,11 @@ public class HelloAndroidActivity extends Activity {
     	tv.setText(text);
     	Toast.makeText(this, "Changed Text : " + text, Toast.LENGTH_SHORT).show();
     }
-    private void SaveState()
+    private void saveState()
     {
-    
+    	
     }
-    private void RestoreState()
+    private void restoreState()
     {
     	
     }
