@@ -4,9 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<EditText android:layout_height="wrap_content" android:id="@+id/editText1" android:layout_width="match_parent">
+<EditText android:layout_height="wrap_content" android:id="@+id/editText" android:layout_width="match_parent" android:hint="Type here">
     <requestFocus></requestFocus>
 </EditText>
-<Button android:id="@+id/button1" android:layout_height="wrap_content" android:text="@string/button" android:layout_width="wrap_content"></Button>
-<TextView android:text="@string/hello" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
+<Button android:id="@+id/button" android:layout_height="wrap_content" android:text="@string/button" android:layout_width="wrap_content"></Button>
+<TextView android:id="@+id/tv" android:text="@string/hello" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
 </LinearLayout>
